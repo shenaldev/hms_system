@@ -1,4 +1,4 @@
-<!-- jquery-ui --> 
+<!-- jquery-ui -->
 
 <script src="<?php echo base_url('assets/plugins/bootstrap/js/datatables.min.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js') ?>" type="text/javascript"></script>
@@ -6,7 +6,7 @@
 <script src="<?php echo base_url('assets/js/datatable.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/js/datatablereport.js') ?>" type="text/javascript"></script>
 
-<script src="<?php echo base_url();?>assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/popper.min.js"></script>
 <script src="<?php echo base_url('assets/plugins/bootstrap/js/bootstrap-select.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/plugins/bootstrap/js/bootstrap.min.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/plugins/bootstrap/js/moment-with-locales.min.js') ?>" type="text/javascript"></script>
@@ -44,41 +44,42 @@
 <!-- Select2 -->
 <script src="<?php echo base_url('assets/js/select2.min.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js') ?>" type="text/javascript"></script>
-<script src="<?php echo base_url("assets/plugins/jQuery-print/jQuery.print.min.js")?>"></script>
+<script src="<?php echo base_url("assets/plugins/jQuery-print/jQuery.print.min.js") ?>"></script>
 
 
 
 <!-- Ordermanage js load -->
 <script src="<?php echo base_url('assets/js/jquery.slimscroll.min.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/js/pusher.min.js') ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('assets/mousetrap-master/mousetrap.min.js')?>" type="text/javascript"></script>
-<?php  $path = 'application/modules/';
-        $map = directory_map($path);
-        $modnames = array();
-        if (is_array($map) && sizeof($map) > 0){
-        $modnames = array_filter(array_keys($map));
-        $modnames = preg_replace('/\W/', '', $modnames);
-        }
-        if (in_array("ordermanage", $modnames) === true) {
-           
-            ?>
-        
-<script src="<?php echo base_url('/ordermanage/order/showljslang') ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('/application/modules/ordermanage/assets/js/print.js') ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/mousetrap-master/mousetrap.min.js') ?>" type="text/javascript"></script>
+<?php $path = 'application/modules/';
+$map = directory_map($path);
+$modnames = array();
+if (is_array($map) && sizeof($map) > 0) {
+    $modnames = array_filter(array_keys($map));
+    $modnames = preg_replace('/\W/', '', $modnames);
+}
+if (in_array("ordermanage", $modnames) === true) {
+
+?>
+
+    <script src="<?php echo base_url('/ordermanage/order/showljslang') ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('/application/modules/ordermanage/assets/js/print.js') ?>" type="text/javascript"></script>
 <?php } ?>
-<?php $checkModule = $this->db->where('directory', 'day_closing')->where('status', 1)->get('module')->num_rows(); if ($checkModule == 1) { ?>
+<?php $checkModule = $this->db->where('directory', 'day_closing')->where('status', 1)->get('module')->num_rows();
+if ($checkModule == 1) { ?>
     <a id="dayClose" hidden></a>
     <script src="<?php echo base_url('application/modules/day_closing/assets/js/cashregister.js') ?>" type="text/javascript"></script>
 <?php } ?>
 <!-- Include module Script -->
 <?php
-    $path = 'application/modules/';
-    $map  = directory_map($path);
-    if (is_array($map) && sizeof($map) > 0)
+$path = 'application/modules/';
+$map  = directory_map($path);
+if (is_array($map) && sizeof($map) > 0)
     foreach ($map as $key => $value) {
-        $js   = str_replace("\\", '/', $path.$key.'assets/js/script.js'); 
+        $js   = str_replace("\\", '/', $path . $key . 'assets/js/script.js');
         if (file_exists($js)) {
-            echo "<script src=".base_url($js)." type=\"text/javascript\"></script>";
-        }   
-    }   
+            echo "<script src=" . base_url($js) . " type=\"text/javascript\"></script>";
+        }
+    }
 ?>

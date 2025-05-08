@@ -7,7 +7,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,13 +27,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
- * @license	https://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
+ * @package    CodeIgniter
+ * @author    EllisLab Dev Team
+ * @copyright    Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright    Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license    http://opensource.org/licenses/MIT    MIT License
+ * @link    https://codeigniter.com
+ * @since    Version 1.0.0
  * @filesource
  */
 
@@ -72,16 +72,17 @@ switch (ENVIRONMENT) {
 
 	case 'testing':
 	case 'production':
-		ini_set('display_errors', 1);
-		if (version_compare(PHP_VERSION, '5.3', '>=')) {
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '8.1', '>=')) {
 			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
 		} else {
 			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
 		}
+
 		break;
 
 	default:
-		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		header('HTTP/1.1 503 Service Unavailable.', true, 503);
 		echo 'The application environment is not set correctly.';
 		exit(1); // EXIT_ERROR
 }
@@ -128,7 +129,6 @@ $application_folder = 'application';
  */
 $view_folder = '';
 
-
 /*
  * --------------------------------------------------------------------
  * DEFAULT CONTROLLER
@@ -148,16 +148,20 @@ $view_folder = '';
  *
  * Un-comment the $routing array below to use this feature
  */
+
 // The directory name, relative to the "controllers" directory.  Leave blank
+
 // if your controller is not in a sub-directory within the "controllers" one
+
 // $routing['directory'] = '';
 
 // The controller class file name.  Example:  mycontroller
+
 // $routing['controller'] = '';
 
 // The controller function you wish to be called.
-// $routing['function']	= '';
 
+// $routing['function']    = '';
 
 /*
  * -------------------------------------------------------------------
@@ -173,12 +177,13 @@ $view_folder = '';
  *
  * Un-comment the $assign_to_config array below to use this feature
  */
+
 // $assign_to_config['name_of_config_item'] = 'value of config item';
 
-
-
 // --------------------------------------------------------------------
+
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+
 // --------------------------------------------------------------------
 
 /*
@@ -192,7 +197,7 @@ if (defined('STDIN')) {
 	chdir(dirname(__FILE__));
 }
 
-if (($_temp = realpath($system_path)) !== FALSE) {
+if (($_temp = realpath($system_path)) !== false) {
 	$system_path = $_temp . DIRECTORY_SEPARATOR;
 } else {
 	// Ensure there's a trailing slash
@@ -204,8 +209,8 @@ if (($_temp = realpath($system_path)) !== FALSE) {
 }
 
 // Is the system path correct?
-if (! is_dir($system_path)) {
-	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+if (!is_dir($system_path)) {
+	header('HTTP/1.1 503 Service Unavailable.', true, 503);
 	echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: ' . pathinfo(__FILE__, PATHINFO_BASENAME);
 	exit(3); // EXIT_CONFIG
 }
@@ -229,7 +234,7 @@ define('SYSDIR', basename(BASEPATH));
 
 // The path to the "application" directory
 if (is_dir($application_folder)) {
-	if (($_temp = realpath($application_folder)) !== FALSE) {
+	if (($_temp = realpath($application_folder)) !== false) {
 		$application_folder = $_temp;
 	} else {
 		$application_folder = strtr(
@@ -245,7 +250,7 @@ if (is_dir($application_folder)) {
 		DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR
 	);
 } else {
-	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	header('HTTP/1.1 503 Service Unavailable.', true, 503);
 	echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF;
 	exit(3); // EXIT_CONFIG
 }
@@ -253,10 +258,10 @@ if (is_dir($application_folder)) {
 define('APPPATH', $application_folder . DIRECTORY_SEPARATOR);
 
 // The path to the "views" directory
-if (! isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) {
+if (!isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) {
 	$view_folder = APPPATH . 'views';
 } elseif (is_dir($view_folder)) {
-	if (($_temp = realpath($view_folder)) !== FALSE) {
+	if (($_temp = realpath($view_folder)) !== false) {
 		$view_folder = $_temp;
 	} else {
 		$view_folder = strtr(
@@ -272,7 +277,7 @@ if (! isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR))
 		DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR
 	);
 } else {
-	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	header('HTTP/1.1 503 Service Unavailable.', true, 503);
 	echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF;
 	exit(3); // EXIT_CONFIG
 }
@@ -286,27 +291,52 @@ define('VIEWPATH', $view_folder . DIRECTORY_SEPARATOR);
  *
  * And away we go...
  */
-/*******
-----------------------------
+/*----------------------------
 Check Database Connection
 ----------------------------
  *********/
-include('application/config/database.php');
-$mysqli = new mysqli($db['default']['hostname'], $db['default']['username'], $db['default']['password'], $db['default']['database']);
+include 'application/config/database.php';
 
-// Check connection
-if ($mysqli->connect_errno) {
+if ($db['default']['database'] == "{DATABASE}" || $db['default']['database'] == "") {
 	$https = false;
+
 	if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
 		$protocol = 'https://';
 	} else {
 		$protocol = 'http://';
 	}
+
 	$dirname = rtrim(dirname($_SERVER['PHP_SELF']), '/') . '/';
-	if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] != 'off') $https = true;
+
+	if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] != 'off') {
+		$https = true;
+	}
+
 	$installerurl = $protocol . $_SERVER['HTTP_HOST'] . $dirname;
 	header('Location: ' . $installerurl . 'install');
 	exit;
+} else {
+
+	$mysqli = new mysqli($db['default']['hostname'], $db['default']['username'], $db['default']['password'], $db['default']['database']);
+
+	// Check connection
+	if ($mysqli->connect_errno) {
+		$https = false;
+		if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+			$protocol = 'https://';
+		} else {
+			$protocol = 'http://';
+		}
+
+		$dirname = rtrim(dirname($_SERVER['PHP_SELF']), '/') . '/';
+		if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] != 'off') {
+			$https = true;
+		}
+
+		$installerurl = $protocol . $_SERVER['HTTP_HOST'] . $dirname;
+		header('Location: ' . $installerurl . 'install');
+		exit;
+	}
 }
 
 require_once BASEPATH . 'core/CodeIgniter.php';

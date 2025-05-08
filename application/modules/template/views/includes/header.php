@@ -1,5 +1,10 @@
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/notify.css">
-
+<style>
+    .day-close {
+        background-color: #d30610;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+</style>
 <div id="openregister" class="modal fade  bd-example-modal-lg" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" id="openclosecash">
@@ -15,17 +20,22 @@
     <div class="navbar-icon d-flex">
         <ul class="navbar-nav flex-row align-items-center">
             <div class="">
-                <a href="<?php echo base_url('') ?>" target="_blank" class="btn btn-success"><?php echo display('website') ?></a>
+                <a href="<?php echo base_url('') ?>" target="_blank" class="btn btn-success mr-1"><?php echo display('website') ?></a>
             </div>
-
+            <div class="">
+                <a href="<?php echo base_url('room_reservation/checkin-list') ?>" target="_blank" class="btn btn-info mr-1"><?php echo display('customer') . ' ' . display('invoice'); ?></a>
+            </div>
+            <div class="">
+                <a href="<?php echo base_url('reports/booking-report'); ?>" target="_blank" class="btn btn-dark"><?php echo display('booking_report'); ?></a>
+            </div>
             <?php
             $checkModule = $this->db->where('directory', 'day_closing')->where('status', 1)->get('module')->num_rows();
-            if ($checkModule == 1 & $this->db->table_exists('tbl_cashregister')) {
+            if ($checkModule == 1) {
                 $saveid = $this->session->userdata('id');
                 $checkuser = $this->db->select('*')->from('tbl_cashregister')->where('userid', $saveid)->where('status', 0)->order_by('id', 'DESC')->get()->row();
                 if (!empty($checkuser)) { ?>
                     <div>
-                        <li class="day-close"><a href="javascript:;" class="btn" onclick="closeopenresister()" role="button"><span class="text-white"><?php echo display("day_close") ?></span></a></li>
+                        <li class="day-close"><a href="javascript:;" class="btn" onclick="closeopenresister()" role="button"><span class="text-white">Day Close</span></a></li>
                     </div>
             <?php }
             } ?>
