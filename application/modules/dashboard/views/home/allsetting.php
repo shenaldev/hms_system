@@ -46,19 +46,9 @@
                                         aria-controls="v-pills-assignuserrolelist"
                                         aria-selected="false"><?php echo display('user_access_role') ?></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" onclick="getlanguage();" id="v-pills-addlanguage-tab"
-                                        data-toggle="pill" href="#v-pills-addlanguage" role="tab"
-                                        aria-controls="v-pills-addlanguage"
-                                        aria-selected="false"><?php echo display('language'); ?></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" onclick="getphrase()" id="v-pills-addphrase-tab"
-                                        data-toggle="pill" href="#v-pills-addphrase" role="tab"
-                                        aria-controls="v-pills-addphrase"
-                                        aria-selected="false"><?php echo display('add_phrase'); ?></a>
-                                </li>
 
+
+                                <!-- 
                                 <li class="nav-item">
                                     <a class="nav-link" onclick="getmailconfig()" id="v-pills-mailconfigs-tab"
                                         data-toggle="pill" href="#v-pills-mailconfigs" role="tab"
@@ -95,6 +85,8 @@
                                         aria-controls="v-pills-currencylist"
                                         aria-selected="false"><?php echo display('currency'); ?></a>
                                 </li>
+                                
+ -->
                                 <li class="nav-item">
                                     <a class="nav-link" onclick="getapplicationlist()" id="v-pills-applicationlist-tab"
                                         data-toggle="pill" href="#v-pills-applicationlist" role="tab"
@@ -107,12 +99,12 @@
                                         aria-controls="v-pills-commonlist"
                                         aria-selected="false"><?php echo display('common_setting'); ?></a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" onclick="getcompanies()" id="v-pills-companies-tab"
                                         data-toggle="pill" href="#v-pills-companies" role="tab"
                                         aria-controls="v-pills-companies"
                                         aria-selected="false"><?php echo display("brand_logo"); ?></a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a class="nav-link" onclick="getteammembers()" id="v-pills-teammembers-tab"
                                         data-toggle="pill" href="#v-pills-teammembers" role="tab"
@@ -125,7 +117,7 @@
                                         aria-controls="v-pills-visitor"
                                         aria-selected="false"><?php echo display("counter"); ?></a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" onclick="getteamgallery()" id="v-pills-teamgallery-tab"
                                         data-toggle="pill" href="#v-pills-teamgallery" role="tab"
                                         aria-controls="v-pills-teamgallery"
@@ -188,7 +180,7 @@
                                     <a class="nav-link" onclick="getfooter()" id="v-pills-footer-tab" data-toggle="pill"
                                         href="#v-pills-footer" role="tab" aria-controls="v-pills-footer"
                                         aria-selected="false"><?php echo display("footer"); ?></a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -325,42 +317,9 @@
                                         href="#v-pills-assignuserrolelist"><?php echo display('next'); ?></a>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="v-pills-assignuserrolelist" role="tabpanel"
-                                aria-labelledby="v-pills-assignuserrolelist-tab">
-                                <div class="assignuserrolelist_show"></div><br>
 
-                                <div class="offset-3 mb-3 group-end">
-                                    <a class="btn btn-danger btnPrevious" id="v-pills-assignuserrole-tab"
-                                        data-toggle="pill"
-                                        href="#v-pills-assignuserrole"><?php echo display('previous'); ?></a>
-                                    <a class="btn btn-success btnNext" id="v-pills-addlanguage-tab" data-toggle="pill"
-                                        href="#v-pills-addlanguage"><?php echo display('next'); ?></a>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="v-pills-addlanguage" role="tabpanel"
-                                aria-labelledby="v-pills-addlanguage-tab">
-                                <div class="addlanguage_show"></div><br>
 
-                                <div class="offset-3 mb-3 group-end">
-                                    <a class="btn btn-danger btnPrevious" id="v-pills-assignuserrolelist-tab"
-                                        data-toggle="pill"
-                                        href="#v-pills-assignuserrolelist"><?php echo display('previous'); ?></a>
-                                    <a class="btn btn-success btnNext" id="v-pills-addphrase-tab" data-toggle="pill"
-                                        href="#v-pills-addphrase"><?php echo display('next'); ?></a>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="v-pills-addphrase" role="tabpanel"
-                                aria-labelledby="v-pills-addphrase-tab">
-                                <div class="addphrase_show"></div><br>
 
-                                <div class="offset-3 mb-3 group-end">
-                                    <a class="btn btn-danger btnPrevious" id="v-pills-addlanguage-tab"
-                                        data-toggle="pill"
-                                        href="#v-pills-addlanguage"><?php echo display('previous'); ?></a>
-                                    <a class="btn btn-success btnNext" id="v-pills-mailconfigs-tab" data-toggle="pill"
-                                        href="#v-pills-mailconfigs"><?php echo display('next'); ?></a>
-                                </div>
-                            </div>
 
                             <div class="tab-pane fade" id="v-pills-mailconfigs" role="tabpanel"
                                 aria-labelledby="v-pills-mailconfigs-tab">
@@ -438,20 +397,20 @@
                                             <select name="menuid" class="form-control" id="menuid">
                                                 <option value="" selected disabled><?php echo display('sub_menu') ?>
                                                 </option>
-                                                <?php if(isset($allmenu )){ ?>
-                                                <?php foreach ($allmenu as $menu) { ?>
-                                                <option value="<?php echo html_escape($menu->menuid); ?>"
-                                                    class='bolden'>
-                                                    <strong><?php echo html_escape($menu->menu_name); ?></strong>
-                                                </option>
-                                                <?php if (!empty($menu->sub)) {
-                                                        foreach ($menu->sub as $submenu) { ?>
-                                                <option value="0">
-                                                    &nbsp;&nbsp;&nbsp;&mdash;<?php echo html_escape($submenu->menu_name); ?>
-                                                </option>
-                                                <?php }
-                                                    }
-                                                } ?>
+                                                <?php if (isset($allmenu)) { ?>
+                                                    <?php foreach ($allmenu as $menu) { ?>
+                                                        <option value="<?php echo html_escape($menu->menuid); ?>"
+                                                            class='bolden'>
+                                                            <strong><?php echo html_escape($menu->menu_name); ?></strong>
+                                                        </option>
+                                                        <?php if (!empty($menu->sub)) {
+                                                            foreach ($menu->sub as $submenu) { ?>
+                                                                <option value="0">
+                                                                    &nbsp;&nbsp;&nbsp;&mdash;<?php echo html_escape($submenu->menu_name); ?>
+                                                                </option>
+                                                    <?php }
+                                                        }
+                                                    } ?>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -584,7 +543,7 @@
                             </div>
                             <div class="tab-pane fade" id="v-pills-gallery" role="tabpanel"
                                 aria-labelledby="v-pills-gallery-tab">
-                                <h4><?php echo display("ad")." ".display("gallery"); ?></h4>
+                                <h4><?php echo display("ad") . " " . display("gallery"); ?></h4>
                                 <br>
                                 <div class="form-group row">
                                     <label for="name" class="col-sm-2 gallery-inp-hi"><?php echo display('name') ?><span
@@ -639,7 +598,7 @@
                             </div>
                             <div class="tab-pane fade" id="v-pills-slider" role="tabpanel"
                                 aria-labelledby="v-pills-slider-tab">
-                                <h4><?php echo display("ad")." ".display("slider")." ".display("Image") ?></h4>
+                                <h4><?php echo display("ad") . " " . display("slider") . " " . display("Image") ?></h4>
                                 <br>
                                 <div class="form-group row">
                                     <label for="title" class="col-sm-2 gallery-inp-hi"><?php echo display("image_size") ?> <span

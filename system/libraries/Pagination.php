@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,8 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
- * @license	https://opensource.org/licenses/MIT	MIT License
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -339,10 +339,6 @@ class CI_Pagination {
 			}
 		}
 
-		// _parse_attributes(), called by initialize(), needs to run at least once
-		// in order to enable "rel" attributes, and this triggers it.
-		isset($params['attributes']) OR $params['attributes'] = array();
-
 		$this->initialize($params);
 		log_message('info', 'Pagination Class Initialized');
 	}
@@ -357,7 +353,8 @@ class CI_Pagination {
 	 */
 	public function initialize(array $params = array())
 	{
-		if (isset($params['attributes']) && is_array($params['attributes']))
+		isset($params['attributes']) OR $params['attributes'] = array();
+		if (is_array($params['attributes']))
 		{
 			$this->_parse_attributes($params['attributes']);
 			unset($params['attributes']);
@@ -431,7 +428,7 @@ class CI_Pagination {
 		{
 			$get = $this->CI->input->get();
 
-			// Unset the control, method, old-school routing options
+			// Unset the controll, method, old-school routing options
 			unset($get['c'], $get['m'], $get[$this->query_string_segment]);
 		}
 		else
@@ -522,14 +519,11 @@ class CI_Pagination {
 		}
 
 		// If something isn't quite right, back to the default base page.
-		if ( ! ctype_digit($this->cur_page) OR ($this->use_page_numbers && (int) $this->cur_page === 0))
-		{
+		if ($this->cur_page === null || !ctype_digit((string)$this->cur_page) || ($this->use_page_numbers && (int)$this->cur_page === 0)) {
 			$this->cur_page = $base_page;
-		}
-		else
-		{
+		} else {
 			// Make sure we're using integers for comparisons later.
-			$this->cur_page = (int) $this->cur_page;
+			$this->cur_page = (int)$this->cur_page;
 		}
 
 		// Is the page number beyond the result range?

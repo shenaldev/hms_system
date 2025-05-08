@@ -1,44 +1,5 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/notify.css">
-<?php
-$new_version  = 2.2;
-$myversion = current_version();
-function current_version()
-{
 
-    //Current Version
-    $product_version = '';
-    $path = FCPATH . 'system/core/compat/lic.php';
-    if (file_exists($path)) {
-
-        // Open the file
-        $whitefile = file_get_contents($path);
-
-        $file = fopen($path, "r");
-        $i    = 0;
-        $product_version_tmp = array();
-        $product_key_tmp = array();
-        while (!feof($file)) {
-            $line_of_text = fgets($file);
-
-            if (strstr($line_of_text, 'product_version')  && $i == 0) {
-                $product_version_tmp = explode('=', strstr($line_of_text, 'product_version'));
-                $i++;
-            }
-        }
-        fclose($file);
-
-        $product_version = trim(@$product_version_tmp[1]);
-        $product_version = ltrim(@$product_version, '\'');
-        $product_version = rtrim(@$product_version, '\';');
-
-        return @$product_version;
-    } else {
-        //file is not exists
-        return false;
-    }
-}
-
-?>
 <div id="openregister" class="modal fade  bd-example-modal-lg" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" id="openclosecash">
@@ -56,13 +17,7 @@ function current_version()
             <div class="">
                 <a href="<?php echo base_url('') ?>" target="_blank" class="btn btn-success"><?php echo display('website') ?></a>
             </div>
-            <?php
-            $notification = $this->db->select("*")->from("tbl_version_checker")->get()->row();
-            if ($notification->disable == 0 | $notification->version != $new_version) { ?>
-                <div>
-                    <?php if ($new_version > $myversion) { ?><li><a href="<?php echo base_url("autoupdate") ?>" style="display: flex;align-items: center;background: #f81111;padding: 5px 10px 5px 10px;margin-right: 5px;margin-left: 5px;color: #fff;animation-name: anim_opa; animation-duration: 0.8s; animation-iteration-count: infinite;"><i class="fa fa-warning" style="background: transparent; border: 0; color: #fff;"></i><span style="font-size: 16px;font-weight: 600;"><?php echo display("update") . " " . display("available") ?></span></a></li><?php } ?>
-                </div>
-            <?php } ?>
+
             <?php
             $checkModule = $this->db->where('directory', 'day_closing')->where('status', 1)->get('module')->num_rows();
             if ($checkModule == 1 & $this->db->table_exists('tbl_cashregister')) {

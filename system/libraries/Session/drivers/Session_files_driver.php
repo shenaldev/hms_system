@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,8 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
- * @license	https://opensource.org/licenses/MIT	MIT License
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 3.0.0
  * @filesource
@@ -84,11 +84,11 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	protected $_sid_regexp;
 
 	/**
-	 * mbstring.func_overload flag
+	 * mbstring.func_override flag
 	 *
 	 * @var	bool
 	 */
-	protected static $func_overload;
+	protected static $func_override;
 
 	// ------------------------------------------------------------------------
 
@@ -115,7 +115,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 
 		$this->_sid_regexp = $this->_config['_sid_regexp'];
 
-		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
+		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
 	}
 
 	// ------------------------------------------------------------------------
@@ -129,7 +129,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 * @param	string	$name		Session cookie name
 	 * @return	bool
 	 */
-	public function open($save_path, $name)
+	public function open(string $save_path, string $name): bool
 	{
 		if ( ! is_dir($save_path))
 		{
@@ -148,8 +148,6 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 			.$name // we'll use the session cookie name as a prefix to avoid collisions
 			.($this->_config['match_ip'] ? md5($_SERVER['REMOTE_ADDR']) : '');
 
-		$this->php5_validate_id();
-
 		return $this->_success;
 	}
 
@@ -163,7 +161,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 * @param	string	$session_id	Session ID
 	 * @return	string	Serialized session data
 	 */
-	public function read($session_id)
+	public function read(string $session_id): string|false
 	{
 		// This might seem weird, but PHP 5.6 introduces session_reset(),
 		// which re-reads session data
@@ -232,7 +230,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 * @param	string	$session_data	Serialized session data
 	 * @return	bool
 	 */
-	public function write($session_id, $session_data)
+	public function write(string $session_id, string $session_data): bool
 	{
 		// If the two IDs don't match, we have a session_regenerate_id() call
 		// and we need to close the old handle and open a new one
@@ -289,7 +287,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 *
 	 * @return	bool
 	 */
-	public function close()
+	public function close(): bool
 	{
 		if (is_resource($this->_file_handle))
 		{
@@ -312,7 +310,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 * @param	string	$session_id	Session ID
 	 * @return	bool
 	 */
-	public function destroy($session_id)
+	public function destroy(string $session_id): bool
 	{
 		if ($this->close() === $this->_success)
 		{
@@ -353,7 +351,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 * @param	int 	$maxlifetime	Maximum lifetime of sessions
 	 * @return	bool
 	 */
-	public function gc($maxlifetime)
+	public function gc(int $maxlifetime): int|false
 	{
 		if ( ! is_dir($this->_config['save_path']) OR ($directory = opendir($this->_config['save_path'])) === FALSE)
 		{
@@ -394,24 +392,6 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	// --------------------------------------------------------------------
 
 	/**
-	 * Validate ID
-	 *
-	 * Checks whether a session ID record exists server-side,
-	 * to enforce session.use_strict_mode.
-	 *
-	 * @param	string	$id
-	 * @return	bool
-	 */
-	public function validateSessionId($id)
-	{
-		$result = is_file($this->_file_path.$id);
-		clearstatcache(TRUE, $this->_file_path.$id);
-		return $result;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Byte-safe strlen()
 	 *
 	 * @param	string	$str
@@ -419,7 +399,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 */
 	protected static function strlen($str)
 	{
-		return (self::$func_overload)
+		return (self::$func_override)
 			? mb_strlen($str, '8bit')
 			: strlen($str);
 	}

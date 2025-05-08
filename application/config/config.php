@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +24,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $https = false;
-	 if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
-		  $protocol = 'https://';
-		}
-		else {
-		  $protocol = 'http://';
-		}
+if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+    $protocol = 'https://';
+} else {
+    $protocol = 'http://';
+}
 
-$dirname = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/').'/';
-$root=$protocol.$_SERVER['HTTP_HOST'].$dirname;
-$config["base_url"] = $root;  
+$dirname = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/') . '/';
+$root = $protocol . $_SERVER['HTTP_HOST'] . $dirname;
+$config["base_url"] = $root;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,7 +61,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol']    = 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +85,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']    = 'english';
 
 /*
 |--------------------------------------------------------------------------
@@ -147,7 +146,7 @@ $config['subclass_prefix'] = 'MY_';
 |	autoloading (application/config/autoload.php)
 */
 $config['composer_autoload'] = FALSE;
-require FCPATH.'vendor/autoload.php';
+require FCPATH . 'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -391,7 +390,7 @@ $config['encryption_key'] = 'TubaHotelMGT@1!KEY2019';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = APPPATH.'cache/temp/';
+$config['sess_save_path'] = APPPATH . 'cache/temp/';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
@@ -411,11 +410,11 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
-$config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_prefix']    = '';
+$config['cookie_domain']    = '';
+$config['cookie_path']        = '/';
+$config['cookie_secure']    = FALSE;
+$config['cookie_httponly']     = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -464,21 +463,15 @@ $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = false;
-$config['csrf_exclude_uris'] = array('accounts/accounts/insert_coa','dashboard/autoupdate/update', 'dashboard/autoupdate/updatenow','hotel/successful/[0-9]+/[0-9]+','hotel/fail/[0-9]+','hotel/cancilorder/[0-9]+');
+$config['csrf_exclude_uris'] = array('accounts/accounts/insert_coa', 'dashboard/autoupdate/update', 'dashboard/autoupdate/updatenow', 'hotel/successful/[0-9]+/[0-9]+', 'hotel/fail/[0-9]+', 'hotel/cancilorder/[0-9]+');
 
-if (isset($_SERVER["REQUEST_URI"])) 
-{
-    if((stripos($_SERVER["REQUEST_URI"],'/app') === FALSE) && (stripos($_SERVER["REQUEST_URI"],'/api_handler_v2') === FALSE) && (stripos($_SERVER["REQUEST_URI"],'/dashboard/setting/create') === FALSE))
-    {
+if (isset($_SERVER["REQUEST_URI"])) {
+    if ((stripos($_SERVER["REQUEST_URI"], '/app') === FALSE) && (stripos($_SERVER["REQUEST_URI"], '/api_handler_v2') === FALSE) && (stripos($_SERVER["REQUEST_URI"], '/dashboard/setting/create') === FALSE)) {
         $config['csrf_protection'] = TRUE;
-    }
-    else
-    {
+    } else {
         $config['csrf_protection'] = FALSE;
-    } 
-} 
-else 
-{
+    }
+} else {
     $config['csrf_protection'] = TRUE;
 }
 
@@ -548,3 +541,5 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+$config['demo_mode'] = false;
