@@ -1,6 +1,7 @@
 {
-  "intelephense.diagnostics.enable": true,
+  "intelephense.diagnostics.enable": false,
   "intelephense.environment.phpVersion": "8.3.0",
+  "intelephense.diagnostics.undefinedVariables": false,
   "php.validate.enable": true,
   "php.validate.run": "onType"
 }
