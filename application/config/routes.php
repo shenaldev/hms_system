@@ -62,7 +62,6 @@ $route['forgot-check'] = "dashboard/auth/forgot_check";
 $route['dashboard/home'] = "dashboard/home";
 $route['profile-setting'] = "dashboard/home/setting";
 $route['profile'] = "dashboard/home/profile";
-$route['autoupdate'] = "dashboard/autoupdate";
 //module
 $route['module'] = "addon/module/index";
 
