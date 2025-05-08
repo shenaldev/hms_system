@@ -1114,9 +1114,7 @@ $fullname = $this->session->userdata('fullname');
                 <!-- end foreach -->
             <?php } ?>
             <?php if ($this->session->userdata('isAdmin')) { ?>
-                <li class="<?php echo (($this->uri->segment(1) == "module") ? "mm-active" : null) ?>"><a
-                        href="<?php echo base_url('module') ?>"><i
-                            class="ti-widgetized"></i><span><?php echo display('moduless') ?></span> </a></li>
+
                 <li class="<?php echo (($this->uri->segment(1) == "setting") ? "mm-active" : null) ?>"><a
                         href="<?php echo base_url('setting') ?>"><i
                             class="ti-settings"></i><?php echo display('settings') ?></a></li>
