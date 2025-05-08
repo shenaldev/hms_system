@@ -42,22 +42,22 @@
                     <div class="">
                         <!-- alert message -->
                         <?php if ($this->session->flashdata('message') != null) {  ?>
-                        <div class="alert alert-info alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <?php echo $this->session->flashdata('message'); ?>
-                        </div>
+                            <div class="alert alert-info alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <?php echo $this->session->flashdata('message'); ?>
+                            </div>
                         <?php } ?>
                         <?php if ($this->session->flashdata('exception') != null) {  ?>
-                        <div class="alert alert-danger alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <?php echo $this->session->flashdata('exception'); ?>
-                        </div>
+                            <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <?php echo $this->session->flashdata('exception'); ?>
+                            </div>
                         <?php } ?>
                         <?php if (validation_errors()) {  ?>
-                        <div class="alert alert-danger alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <?php echo validation_errors(); ?>
-                        </div>
+                            <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <?php echo validation_errors(); ?>
+                            </div>
                         <?php } ?>
                     </div>
                     <div class="form-card mb-5">
@@ -86,16 +86,10 @@
                                     <i onclick="passShow()" class="fa fa-eye-slash"></i>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <!-- capta part -->
-                            </div>
-                            <div class="form-group">
-                                <label class="input-label font-weight-bold" for="captcha"><?php echo $captcha_image ?></label>
 
-                                <input type="captcha" placeholder="<?php echo display('captcha') ?>" name="captcha"
-                                    id="captcha" class="form-control fs-16px" autocomplete="off">
-                            </div>
-                            <a href="forgot-password"><p class="text-right"><?php echo display('forgot_password') ?></p></a>
+                            <a href="forgot-password">
+                                <p class="text-right"><?php echo display('forgot_password') ?></p>
+                            </a>
                             <button type="submit"
                                 class="btn btn-lg btn-block btn-success"><?php echo display('login') ?></button>
                             <?php echo form_close() ?>
