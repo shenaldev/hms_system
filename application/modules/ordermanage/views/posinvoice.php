@@ -705,7 +705,7 @@
                 </div>
                 <div class="text-center">
                     <h3 class="mt-10"><?php echo display('thanks_you') ?></h3>
-                    <p class="b_top"> Powered By <b> <?php echo 'Iringa Sunset Hotel' ?></b></p>
+                    <p class="b_top"> Powered By <b> <?php echo 'Fortxcore.com' ?></b></p>
                 </div>
             </div>
         </div>
