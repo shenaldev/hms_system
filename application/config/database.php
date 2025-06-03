@@ -76,9 +76,9 @@ $active_record = TRUE; //ci version 2.x
 
 $db['default'] = array(
     'dsn'   => '',
-    'hostname' => 'localhost',
-    'username' => 'root',
-    'password' => 'password',
+    'hostname' => 'hms_mysql_server',
+    'username' => 'mysql_admin',
+    'password' => 'YKZ2cvw4DeHs',
     'database' => 'hms',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
